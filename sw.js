@@ -2,7 +2,7 @@
    Su única razón de existir es que Chrome considere la página "instalable"
    y que el lanzador abra aunque no haya señal. La app real siempre va en línea. */
 
-const CACHE = 'cotizaciones-inter-v1';
+const CACHE = 'cotizaciones-inter-v2';
 const ARCHIVOS = [
   './',
   './index.html',

@@ -61,6 +61,22 @@
 </div>
 
 <script>
+  // Clave personal de los usuarios externos al dominio. Llega en la URL la primera
+  // vez y se guarda, para que al instalar la app (que abre sin parametros) se siga
+  // enviando. Quien entra con correo @interrd.com no necesita ninguna clave.
+  (function () {
+    var k = '';
+    try { k = new URLSearchParams(window.location.search).get('k') || ''; } catch (e) {}
+    try {
+      if (k) localStorage.setItem('claveAcceso', k);
+      else k = localStorage.getItem('claveAcceso') || '';
+    } catch (e) {}
+    if (k) {
+      var a = document.getElementById('abrir');
+      a.href = a.href + '?k=' + encodeURIComponent(k);
+    }
+  })();
+
   // Instalado y abierto desde el icono: saltar directo a la app.
   var enApp = window.matchMedia('(display-mode: standalone)').matches ||
               window.navigator.standalone === true;
