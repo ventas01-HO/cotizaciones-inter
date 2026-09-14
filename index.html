@@ -44,7 +44,7 @@
   <h1>Sistema de cotizaciones</h1>
   <p id="sub">Control de numeración · INTER A2R Proyectos</p>
 
-  <a class="boton" id="abrir" href="https://script.google.com/macros/s/AKfycbyGaVWAPvsrK1csoOvACCAtSuvWBmK0FoRarQHb_B3rfUWNo0Peq7nu_SugA1VDHvw2/exec">
+  <a class="boton" id="abrir" href="https://script.google.com/a/macros/interrd.com/s/AKfycbyGaVWAPvsrK1csoOvACCAtSuvWBmK0FoRarQHb_B3rfUWNo0Peq7nu_SugA1VDHvw2/exec">
     Abrir sistema de cotizaciones
   </a>
 
@@ -57,7 +57,7 @@
     <div style="margin-top:10px">Queda con este icono y abre a pantalla completa.</div>
   </div>
 
-  <div class="pie">Inicia sesión con tu correo @interrd.com</div>
+  <div class="pie" id="pie">Inicia sesión con tu correo @interrd.com</div>
 </div>
 
 <script>
@@ -72,8 +72,13 @@
       else k = localStorage.getItem('claveAcceso') || '';
     } catch (e) {}
     if (k) {
-      var a = document.getElementById('abrir');
-      a.href = a.href + '?k=' + encodeURIComponent(k);
+      // Los externos NO pertenecen al dominio, asi que la URL /a/macros/interrd.com/
+      // no les vale: para ellos, la forma normal con su clave.
+      document.getElementById('abrir').href =
+        'https://script.google.com/macros/s/AKfycbyGaVWAPvsrK1csoOvACCAtSuvWBmK0FoRarQHb_B3rfUWNo0Peq7nu_SugA1VDHvw2/exec?k=' +
+        encodeURIComponent(k);
+      document.getElementById('pie').textContent =
+        'Acceso externo. Si falla, abre este enlace en una ventana privada.';
     }
   })();
 
